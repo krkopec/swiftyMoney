@@ -40,7 +40,7 @@ public class CurrencyConverter {
         if baseCurrency == self.baseCurrency {
             self.currencyExchangeRates.insert(targetCurrencyExchangeRates)
         } else {
-            print("Could not insert currency exchange rate, because base currencies are not the same")
+            print("Could not insert currency exchange rate, because its base currency and converter's base currency are not the same")
         }
     }
 
@@ -86,18 +86,21 @@ public class CurrencyConverter {
             }
             return baseToTargetCurrencyExchangeRate
         } else {
-            print("Base and target currencies are the same")
             return Decimal(1)
         }
     }
 
     private func getTargetToBaseCurrencyExchangeRate(for currency: Currency) -> Decimal? {
 
-        guard let targetToBaseCurrencyExchangeRate = currencyExchangeRates.first(where: { $0.targetCurrency == currency })?.targetToBaseCurrencyConversionRate else {
+        if currency != baseCurrency {
+            guard let targetToBaseCurrencyExchangeRate = currencyExchangeRates.first(where: { $0.targetCurrency == currency })?.targetToBaseCurrencyConversionRate else {
 
-            print("Could not get target currency exchange rate for currency: \(currency) in currency converter's exchange rates")
-            return nil
+                print("Could not get target currency exchange rate for currency: \(currency) in currency converter's exchange rates")
+                return nil
+            }
+            return targetToBaseCurrencyExchangeRate
+        } else {
+            return Decimal(1)
         }
-        return targetToBaseCurrencyExchangeRate
     }
 }

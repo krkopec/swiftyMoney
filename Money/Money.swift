@@ -47,10 +47,11 @@ extension Money: Equatable {
 }
 
 
-// When performing mathematical operations on monies, the result is returned:
+// When performing subtraction and addition on monies, the result is returned:
 // 1. in original currency if both amounts have the same currency,
-// 2. in converter's base currency if they are of different currencies and a currency converter was set
-// 3. as nil if they are of different currencies and no currency converter was set
+// 2. in converter's base currency if the amounts have different currencies and a currency converter was set
+// 3. as nil if they have different currencies and no currency converter was set
+
 extension Money {
     public static func + (lhs: Money, rhs: Money) -> Money? {
         if lhs.currency == rhs.currency {

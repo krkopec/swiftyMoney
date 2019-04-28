@@ -19,7 +19,7 @@ class MoneyTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    // MARK: Test Money equatability
+    // MARK: Test Money's Equatable conformance
     func testEquatabilityForSameCurrencyAndAmount() {
         let tenEuro = Money(value: 10, currency: .euro)
         let anotherTenEuro = Money(value: 10, currency: .euro)
@@ -44,7 +44,7 @@ class MoneyTests: XCTestCase {
         XCTAssertTrue(tenEuro != anotherTenEuro)
     }
 
-    // MARK: Test Money operations
+    // MARK: Test Money mathematical operations
     func testSameCurrencyAddition() {
         let tenEuro = Money(value: 10, currency: .euro)
         let twelveEuro = Money(value: 12, currency: .euro)
@@ -52,7 +52,6 @@ class MoneyTests: XCTestCase {
     }
 
     func testSameCurrencyAdditionWithDifferentCurrenciesAndNoConverter() {
-        Money.currencyConverter = nil
         let tenEuro = Money(value: 10, currency: .euro)
         let twelveDollars = Money(value: 12, currency: .usDollar)
         XCTAssertTrue(tenEuro + twelveDollars == nil )

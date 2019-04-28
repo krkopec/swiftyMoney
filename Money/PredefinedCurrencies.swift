@@ -63,13 +63,21 @@ extension Currency {
                                           subunitSymbol: CurrencySymbol(symbol: "c",
                                                                         position: .before))
 
-    public static var predefinedCurrencies: Set<Currency> = [Currency.australianDollar,
-                                                             Currency.czechKoruna,
-                                                             Currency.euro,
-                                                             Currency.australianDollar,
-                                                             Currency.polishZloty,
-                                                             Currency.poundSterling,
-                                                             Currency.swedishKrona,
-                                                             Currency.swissFranc,
-                                                             Currency.usDollar]
+    public static var predefinedCurrencies: Set<Currency> = [.australianDollar,
+                                                             .czechKoruna,
+                                                             .euro,
+                                                             .australianDollar,
+                                                             .polishZloty,
+                                                             .poundSterling,
+                                                             .swedishKrona,
+                                                             .swissFranc,
+                                                             .usDollar]
+
+    public static func getCurrency(forCurrencyCode code: String) -> Currency? {
+        return Currency.predefinedCurrencies.first(where: { $0.code == code })
+    }
+
+    public static func insertPredefinedCurrency(currency: Currency) {
+        Currency.predefinedCurrencies.insert(currency)
+    }
 }

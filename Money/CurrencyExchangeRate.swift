@@ -8,7 +8,6 @@
 
 import Foundation
 
-// MARK: TargetCurrencyExchangeRate
 public struct CurrencyExchangeRate {
 
     var targetToBaseCurrencyConversionRate: Decimal {

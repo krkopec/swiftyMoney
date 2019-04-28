@@ -9,7 +9,7 @@
 
 import Foundation
 
-// MARK: CurrencyExchangeRatePackage
+
 public struct CurrencyExchangeRatePackage {
 
     let createdAt: Date?

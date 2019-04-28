@@ -25,7 +25,8 @@ class CurrencyConverterTests: XCTestCase {
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+
+        converter = nil
     }
 
     func testConversionFromBaseToTargetCurrency() {
@@ -75,10 +76,18 @@ class CurrencyConverterTests: XCTestCase {
 
     func testConvertToBaseCurrencyFromBaseCurrency() {
         let twoEuroAndChange = Money(value: 2.13, currency: .euro)
-        guard let twoEuroAndChangeInUSDollars = converter.convertMoneyToBaseCurrency(money: twoEuroAndChange) else {
+        guard let convertedTwoEuroAndChange = converter.convertMoneyToBaseCurrency(money: twoEuroAndChange) else {
             XCTAssert(false); return
         }
-        XCTAssert (twoEuroAndChangeInUSDollars == twoEuroAndChange)
+        XCTAssert (convertedTwoEuroAndChange == twoEuroAndChange)
+    }
+
+    func testConvertToTargetCurrencyFromBaseCurrency() {
+        let twoEuroAndChange = Money(value: 2.13, currency: .euro)
+        guard let convertedTwoEuroAndChange = converter.convert(money: twoEuroAndChange, to: .euro) else {
+            XCTAssert(false); return
+        }
+        XCTAssert (convertedTwoEuroAndChange == twoEuroAndChange)
     }
 
     func testConvertToBaseCurrencyFromAnotherCurrency() {
@@ -97,5 +106,6 @@ class CurrencyConverterTests: XCTestCase {
         let tenDollarsInEuro = 10 * (1 / 1.12979)
         XCTAssertTrue(tenEuro + tenDollars == Money(value: 10 + tenDollarsInEuro,
                                                     currency: .euro) )
+        Money.currencyConverter = nil
     }
 }
