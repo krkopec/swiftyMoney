@@ -44,29 +44,30 @@ class MoneyTests: XCTestCase {
         XCTAssertTrue(tenEuro != anotherTenEuro)
     }
 
-    // Test Money comparability
-    func testSameCurrencyComparability() {
-        let tenEuro = Money(value: 10, currency: .euro)
-        let twelveEuro = Money(value: 12, currency: .euro)
-        XCTAssertTrue(tenEuro < twelveEuro)
-    }
-
-    func testDifferentCurrencyComparability() {
-        let eurToDollarRate = TargetCurrencyExchangeRate(conversionRate: Decimal(1.12979),
-                                                         targetCurrency: Currency.usDollar)
-        let eurExchangeRatePackage = CurrencyExchangeRatePackage(createdAt: nil,
-                                                           baseCurrency: Currency.euro,
-                                                           targetCurrencyExchangeRates: [eurToDollarRate])
-        Money.currencyConverter = CurrencyConverter(currencyExchangeRatePackage: eurExchangeRatePackage)
-        let tenEuro = Money(value: 10, currency: .euro)
-        let tenDollars = Money(value: 10, currency: .usDollar)
-        XCTAssertTrue(tenEuro > tenDollars)
-    }
-
+    // MARK: Test Money operations
     func testSameCurrencyAddition() {
         let tenEuro = Money(value: 10, currency: .euro)
         let twelveEuro = Money(value: 12, currency: .euro)
         XCTAssertTrue(tenEuro + twelveEuro == Money(value: 22, currency: .euro))
+    }
+
+    func testSameCurrencyAdditionWithDifferentCurrenciesAndNoConverter() {
+        Money.currencyConverter = nil
+        let tenEuro = Money(value: 10, currency: .euro)
+        let twelveDollars = Money(value: 12, currency: .usDollar)
+        XCTAssertTrue(tenEuro + twelveDollars == nil )
+    }
+
+    func testSameCurrencySubtraction() {
+        let tenEuro = Money(value: 12, currency: .euro)
+        let twelveEuro = Money(value: 1, currency: .euro)
+        XCTAssertTrue(tenEuro - twelveEuro == Money(value: 11, currency: .euro))
+    }
+
+    func testSameCurrencySubtractionWithNegativeResult() {
+        let tenEuro = Money(value: 12, currency: .euro)
+        let twelveEuro = Money(value: 14, currency: .euro)
+        XCTAssertTrue(tenEuro - twelveEuro == Money(value: -2, currency: .euro))
     }
 
     func testSameCurrencyMultiplicationWithIntegerValue() {
@@ -84,23 +85,23 @@ class MoneyTests: XCTestCase {
         XCTAssertTrue(tenEuro * 2.55  == Money(value: 25.5, currency: .euro) && 5.529 * tenEuro  == Money(value: 55.29, currency: .euro))
     }
 
-
-    func testIntegers() {
-        let ten = Decimal(10)
-        let two = Decimal(2)
-
-        let result = ten / two
-        XCTAssertTrue(two ==  ten  / result)
+    func testSameCurrencyMultiplicationWithDecimalValueVer3() {
+        let tenEuro = Money(value: 10, currency: .euro)
+        XCTAssertTrue(tenEuro * 2.552341214  == Money(value: 25.52, currency: .euro) && 5.529555 * tenEuro  == Money(value: 55.30, currency: .euro))
     }
 
-    func testDecimals() {
-        let ten = Decimal(11.25)
-        let two = Decimal(2)
+    func testSameCurrencyDivisionWithDecimal() {
+        let tenEuro = Money(value: 10, currency: .euro)
+        XCTAssertTrue(tenEuro / Decimal(2.5) == Money(value: 4, currency: .euro))
+    }
 
-        let result = ten / two
-        [two, ten, result].forEach {
-            print($0.magnitude)
-        }
-        XCTAssertTrue(two ==  ten  / result)
+    func testSameCurrencyDivisionWithInt() {
+        let tenEuro = Money(value: 10, currency: .euro)
+        XCTAssertTrue(tenEuro / 2 == Money(value: 5, currency: .euro))
+    }
+
+    func testSameCurrencyDivisionWithDouble() {
+        let tenEuro = Money(value: 10, currency: .euro)
+        XCTAssertTrue(tenEuro / 2.5 == Money(value: 4, currency: .euro))
     }
 }

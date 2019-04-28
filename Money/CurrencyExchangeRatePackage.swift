@@ -15,7 +15,7 @@ public struct CurrencyExchangeRatePackage {
     let createdAt: Date?
     // should be equal to conversionRate times targetCurrency
     let baseCurrency: Currency
-    let targetCurrencyExchangeRates: Set<TargetCurrencyExchangeRate>
+    let currencyExchangeRates: Set<CurrencyExchangeRate>
 }
 
 extension CurrencyExchangeRatePackage: Equatable {
@@ -28,31 +28,6 @@ extension CurrencyExchangeRatePackage: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(createdAt)
         hasher.combine(baseCurrency)
-        hasher.combine(targetCurrencyExchangeRates)
-    }
-}
-
-// MARK: TargetCurrencyExchangeRate
-public struct TargetCurrencyExchangeRate {
-    let conversionRate: Decimal
-    let targetCurrency: Currency
-}
-
-extension TargetCurrencyExchangeRate: Equatable {
-    public static func == (lhs: TargetCurrencyExchangeRate, rhs: TargetCurrencyExchangeRate) -> Bool {
-        return lhs.hashValue == rhs.hashValue
-    }
-}
-
-extension TargetCurrencyExchangeRate: Comparable {
-    public static func < (lhs: TargetCurrencyExchangeRate, rhs: TargetCurrencyExchangeRate) -> Bool {
-        return lhs.conversionRate < rhs.conversionRate
-    }
-}
-
-extension TargetCurrencyExchangeRate: Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(targetCurrency)
-        hasher.combine(conversionRate)
+        hasher.combine(currencyExchangeRates)
     }
 }

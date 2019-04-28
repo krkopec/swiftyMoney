@@ -11,82 +11,93 @@ import Foundation
 public class CurrencyConverter {
 
     public fileprivate(set) var baseCurrency: Currency
-    public fileprivate(set) var targetCurrencyExchangeRates: Set<TargetCurrencyExchangeRate>
+    public fileprivate(set) var currencyExchangeRates: Set<CurrencyExchangeRate>
 
     public init(currencyExchangeRatePackage: CurrencyExchangeRatePackage) {
         self.baseCurrency = currencyExchangeRatePackage.baseCurrency
-        self.targetCurrencyExchangeRates = currencyExchangeRatePackage.targetCurrencyExchangeRates
+        self.currencyExchangeRates = currencyExchangeRatePackage.currencyExchangeRates
     }
 
-    public init(baseCurrency: Currency, targetCurrencyExchangeRates: Set<TargetCurrencyExchangeRate>) {
+    public init(baseCurrency: Currency, targetCurrencyExchangeRates: Set<CurrencyExchangeRate>) {
         self.baseCurrency = baseCurrency
-        self.targetCurrencyExchangeRates = targetCurrencyExchangeRates
+        self.currencyExchangeRates = targetCurrencyExchangeRates
     }
 
     public func setCurrencyExchangeRates(currencyExchangeRatePackage: CurrencyExchangeRatePackage) {
         self.baseCurrency = currencyExchangeRatePackage.baseCurrency
-        self.targetCurrencyExchangeRates = currencyExchangeRatePackage.targetCurrencyExchangeRates
+        self.currencyExchangeRates = currencyExchangeRatePackage.currencyExchangeRates
     }
 
     public func setCurrencyExchangeRates(baseCurrency: Currency,
-                                         targetCurrencyExchangeRates: Set<TargetCurrencyExchangeRate>) {
+                                         targetCurrencyExchangeRates: Set<CurrencyExchangeRate>) {
         self.baseCurrency = baseCurrency
-        self.targetCurrencyExchangeRates = targetCurrencyExchangeRates
+        self.currencyExchangeRates = targetCurrencyExchangeRates
     }
 
     public func insertCurrencyExchangeRate(baseCurrency: Currency,
-                                           targetCurrencyExchangeRates: TargetCurrencyExchangeRate) {
+                                           targetCurrencyExchangeRates: CurrencyExchangeRate) {
 
         if baseCurrency == self.baseCurrency {
-            self.targetCurrencyExchangeRates.insert(targetCurrencyExchangeRates)
+            self.currencyExchangeRates.insert(targetCurrencyExchangeRates)
         } else {
             print("Could not insert currency exchange rate, because base currencies are not the same")
         }
     }
 
-    public func getCurrencyExchangeRate(for currency: Currency) -> Decimal? {
-        return targetCurrencyExchangeRates.first(where: { $0.targetCurrency == currency })?.conversionRate
-    }
+    public func convert(money: Money, to currency: Currency) -> Money? {
 
-    public func convert(money: Money, to targetCurrency: Currency) -> Money? {
+        guard money.currency != currency else { return money }
 
-        guard let moneyValueInBaseCurrency = getBaseCurrencyValue(for: money) else {
-            print("Could not convert money \(money) to base currency \(String(describing: baseCurrency))")
-            return nil
+
+        if money.currency == baseCurrency {
+
+            guard let sourceToTargetCurrencyExchangeRate = getBaseToTargetCurrencyExchangeRate(for: currency) else {
+                return nil
+            }
+            return Money(value: money.value * sourceToTargetCurrencyExchangeRate,
+                         currency: currency)
+        } else {
+            guard let sourceToBaseCurrencyExchangeRate = getTargetToBaseCurrencyExchangeRate(for: money.currency) else {
+                return nil
+            }
+
+            guard let baseToTargetCurrencyExchangeRate = getBaseToTargetCurrencyExchangeRate(for: currency) else {
+                return nil
+            }
+
+            let faceValue = money.value * sourceToBaseCurrencyExchangeRate * baseToTargetCurrencyExchangeRate
+
+            return Money(value: faceValue,
+                         currency: currency)
         }
-
-        guard let targetCurrencyExRate = getCurrencyExchangeRate(for: targetCurrency) else {
-            print("Could not get target currency exchange rate for currency \(String(describing: targetCurrency))")
-            return nil
-        }
-
-        let faceValue = NSDecimalNumber(decimal: moneyValueInBaseCurrency * targetCurrencyExRate)
-
-        return Money(value: faceValue.rounding(accordingToBehavior: Money.decimalHandler) as Decimal,
-                     currency: targetCurrency)
     }
 
     public func convertMoneyToBaseCurrency(money: Money) -> Money? {
-
-        if money.currency == baseCurrency {
-            return money
-        }
-
-        guard let targetConversionRate = getCurrencyExchangeRate(for: money.currency) else {
-            print("Could not get money \(money) to base currency \(String(describing: baseCurrency))")
-            return nil
-        }
-        return Money(value: money.value / targetConversionRate,
-                     currency: baseCurrency)
+        return convert(money: money, to: baseCurrency)
     }
 
-    public func getBaseCurrencyValue(for money: Money) -> Decimal? {
+    private func getBaseToTargetCurrencyExchangeRate(for currency: Currency) -> Decimal? {
 
-        guard let targetConversionRate = getCurrencyExchangeRate(for: money.currency) else {
-            print("Could not get money \(money) to base currency \(String(describing: baseCurrency))")
+        if currency != baseCurrency {
+            guard let baseToTargetCurrencyExchangeRate = currencyExchangeRates.first(where: { $0.targetCurrency == currency })?.baseToTargetCurrencyConversionRate else {
+
+                print("Could not get base-to-target currency exchange rate for currency: \(currency) in currency converter's exchange rates")
+                return nil
+            }
+            return baseToTargetCurrencyExchangeRate
+        } else {
+            print("Base and target currencies are the same")
+            return Decimal(1)
+        }
+    }
+
+    private func getTargetToBaseCurrencyExchangeRate(for currency: Currency) -> Decimal? {
+
+        guard let targetToBaseCurrencyExchangeRate = currencyExchangeRates.first(where: { $0.targetCurrency == currency })?.targetToBaseCurrencyConversionRate else {
+
+            print("Could not get target currency exchange rate for currency: \(currency) in currency converter's exchange rates")
             return nil
         }
-        let valueInBaseCurrency = money.value / targetConversionRate
-        return valueInBaseCurrency
+        return targetToBaseCurrencyExchangeRate
     }
 }

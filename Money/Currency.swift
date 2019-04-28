@@ -42,6 +42,10 @@ public struct Currency {
     public static func getCurrency(forCurrencyCode code: String) -> Currency? {
         return Currency.predefinedCurrencies.first(where: { $0.code == code })
     }
+
+    public static func insertPredefinedCurrency(currency: Currency) {
+        Currency.predefinedCurrencies.insert(currency)
+    }
 }
 
 extension Currency: Equatable {
@@ -56,60 +60,5 @@ extension Currency: Hashable {
         hasher.combine(code)
         hasher.combine(unitSymbol)
         hasher.combine(subunitSymbol)
-    }
-}
-
-// MARK: Currency examples
-extension Currency {
-
-    public static let australianDollar = Currency(name: "Australian dollar",
-                                                  code: "AUD",
-                                                  unitSymbol: CurrencySymbol(symbol: "$",
-                                                                             position: .before),
-                                                  subunitSymbol: CurrencySymbol(symbol: "c",
-                                                                                position: .after))
-    public static let czechKoruna = Currency(name: "Czech koruna",
-                                             code: "CZK",
-                                             unitSymbol: CurrencySymbol(symbol: "Kč",  position: .after),
-                                             subunitSymbol: nil)
-    public static let euro = Currency(name: "Euro",
-                                      code: "EUR",
-                                      unitSymbol: CurrencySymbol(symbol: "€",  position: .before),
-                                      subunitSymbol: CurrencySymbol(symbol: "c",  position: .after))
-    public static let polishZloty = Currency(name: "Polish zloty",
-                                             code: "PLN",
-                                             unitSymbol: CurrencySymbol(symbol: "zł", position: .after),
-                                             subunitSymbol: CurrencySymbol(symbol: "gr", position: .after))
-    public static let poundSterling = Currency(name: "Pound sterling",
-                                               code: "GBP",
-                                               unitSymbol: CurrencySymbol(symbol: "£",
-                                                                          position: .before),
-                                               subunitSymbol: CurrencySymbol(symbol: "p",
-                                                                             position: .after))
-    public static let swedishKrona = Currency(name: "Swedish krona",
-                                              code: "SEK",
-                                              unitSymbol: CurrencySymbol(symbol: "kr", position: .after),
-                                              subunitSymbol: nil)
-    public static let swissFranc = Currency(name: "Swiss Franc",
-                                            code: "CHF",
-                                            unitSymbol: CurrencySymbol(symbol: "Fr", position: .after),
-                                            subunitSymbol: nil)
-    public static let usDollar = Currency(name: "American dollar",
-                                          code: "USD",
-                                          unitSymbol: CurrencySymbol(symbol: "$",  position: .before),
-                                          subunitSymbol: CurrencySymbol(symbol: "c", position: .before))
-
-    public static var predefinedCurrencies: Set<Currency> = [Currency.australianDollar,
-                                                             Currency.czechKoruna,
-                                                             Currency.euro,
-                                                             Currency.australianDollar,
-                                                             Currency.polishZloty,
-                                                             Currency.poundSterling,
-                                                             Currency.swedishKrona,
-                                                             Currency.swissFranc,
-                                                             Currency.usDollar]
-
-    public static func insertPredefinedCurrency(currency: Currency) {
-        Currency.predefinedCurrencies.insert(currency)
     }
 }
