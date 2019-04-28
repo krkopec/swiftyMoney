@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>baseCurrencyCode</key>
+	<string>EUR</string>
+	<key>targetCurrencyExchangeRates</key>
+	<dict>
+		<key>CAD</key>
+		<real>1.565</real>
+		<key>GBP</key>
+		<real>0.87295</real>
+		<key>SEK</key>
+		<real>10.2983</real>
+		<key>USD</key>
+		<real>1.12979</real>
+	</dict>
+</dict>
+</plist>
