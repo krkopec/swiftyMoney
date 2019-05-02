@@ -4,7 +4,7 @@
 <dict>
 	<key>baseCurrencyCode</key>
 	<string>EUR</string>
-	<key>targetCurrencyExchangeRates</key>
+	<key>rates</key>
 	<dict>
 		<key>CAD</key>
 		<real>1.565</real>

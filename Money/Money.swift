@@ -9,6 +9,7 @@
 
 import Foundation
 
+/// A structure representing the concept of money.
 public struct Money {
 
     public let value: Decimal
@@ -21,7 +22,7 @@ public struct Money {
                                                               raiseOnUnderflow: true,
                                                               raiseOnDivideByZero: false)
 
-    // needs to be set, if currency conversion on Money type is to be done
+    // needs to be set, if currency conversion is to be done directly on Money struct
     public static var currencyConverter: CurrencyConverter?
 
     public init(value: Decimal, currency: Currency) {
@@ -46,34 +47,73 @@ extension Money: Equatable {
     }
 }
 
+// Currency conversion methods; may return nil if currencyConverter is not set
+extension Money {
+
+    /// Converts money to the base currency specifies in the Money's static currency converter
+    func convertedToBaseCurrency() -> Money? {
+
+        guard let converter = Money.currencyConverter else {
+            print("Money.currencyConverter is nil")
+            return nil
+        }
+        return converter.convert(money: self, to: converter.baseCurrency)
+    }
+
+    /// Converts money to another currency, according to conversion rates specified by Money's static currency converter
+    func converted(to currency: Currency) -> Money? {
+
+        guard let converter = Money.currencyConverter else {
+            print("Money.currencyConverter is nil")
+            return nil
+        }
+        return converter.convert(money: self, to: currency)
+    }
+}
 
 // When performing subtraction and addition on monies, the result is returned:
 // 1. in original currency if both amounts have the same currency,
-// 2. in converter's base currency if the amounts have different currencies and a currency converter was set
+// 2. in converter's base currency if the amounts have different currencies
+// and a currency converter was set
 // 3. as nil if they have different currencies and no currency converter was set
 
 extension Money {
     public static func + (lhs: Money, rhs: Money) -> Money? {
+
         if lhs.currency == rhs.currency {
             return Money(value: lhs.value + rhs.value, currency: lhs.currency)
         } else {
-            guard currencyConverter != nil,
-                  let lhsInBaseCurrency = currencyConverter?.convertMoneyToBaseCurrency(money: lhs),
-                  let rhsInBaseCurrency = currencyConverter?.convertMoneyToBaseCurrency(money: rhs)
-            else { return nil }
+            guard currencyConverter != nil else {
+                print("Money.currencyConverter is nil")
+                return nil
+            }
+
+            guard let lhsInBaseCurrency = currencyConverter?.convertMoneyToBaseCurrency(money: lhs),
+                let rhsInBaseCurrency = currencyConverter?.convertMoneyToBaseCurrency(money: rhs)
+                else {
+                    print("Could not convert money to currency converter's base currency")
+                    return nil
+            }
 
             return lhsInBaseCurrency + rhsInBaseCurrency
         }
     }
-
     public static func - (lhs: Money, rhs: Money) -> Money? {
+
         if lhs.currency == rhs.currency {
             return Money(value: lhs.value - rhs.value, currency: lhs.currency)
         } else {
-            guard currencyConverter != nil,
-                  let lhsInBaseCurrency = currencyConverter?.convertMoneyToBaseCurrency(money: lhs),
-                  let rhsInBaseCurrency = currencyConverter?.convertMoneyToBaseCurrency(money: rhs)
-            else { return nil }
+            guard currencyConverter != nil else {
+                print("Money.currencyConverter is nil")
+                return nil
+            }
+
+            guard let lhsInBaseCurrency = currencyConverter?.convertMoneyToBaseCurrency(money: lhs),
+                let rhsInBaseCurrency = currencyConverter?.convertMoneyToBaseCurrency(money: rhs)
+                else {
+                    print("Could not convert money to currency converter's base currency")
+                    return nil
+            }
 
             return lhsInBaseCurrency - rhsInBaseCurrency
         }

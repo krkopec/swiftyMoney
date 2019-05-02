@@ -5,10 +5,13 @@
 //  Created by Krystian Kopeć on 02/03/2019.
 //  Copyright © 2019 Krystian Kopeć. All rights reserved.
 //
-//  Contains Currency struct. To make it easier to use various currencies, the Currency struct can be extended with a public static property defining a specific currency.
+//  Defines Currency struct. To make it easier to use various currencies,
+//  it struct can be extended with a public static property defining
+//  a specific currency.
 
 import Foundation
 
+/// A structure representing the concept of a currency.
 public struct Currency {
     public let name: String
     public let code: String

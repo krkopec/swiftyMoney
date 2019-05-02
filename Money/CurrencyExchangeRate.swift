@@ -8,14 +8,18 @@
 
 import Foundation
 
+/// A struct representing a currency exchange rate.
 public struct CurrencyExchangeRate {
 
-    var targetToBaseCurrencyConversionRate: Decimal {
-        return 1 / baseToTargetCurrencyConversionRate
-    }
-
-    let baseToTargetCurrencyConversionRate: Decimal
+    let sourceCurrency: Currency
     let targetCurrency: Currency
+
+    /// specifies sourceCurrency-to-targetCurrency conversion rate
+    let sourceToTargetRate: Decimal
+
+    var targetToSourceRate: Decimal {
+        return 1 / sourceToTargetRate
+    }
 }
 
 extension CurrencyExchangeRate: Equatable {
@@ -26,13 +30,14 @@ extension CurrencyExchangeRate: Equatable {
 
 extension CurrencyExchangeRate: Comparable {
     public static func < (lhs: CurrencyExchangeRate, rhs: CurrencyExchangeRate) -> Bool {
-        return lhs.baseToTargetCurrencyConversionRate < rhs.baseToTargetCurrencyConversionRate
+        return lhs.sourceToTargetRate < rhs.sourceToTargetRate
     }
 }
 
 extension CurrencyExchangeRate: Hashable {
     public func hash(into hasher: inout Hasher) {
+        hasher.combine(sourceCurrency)
         hasher.combine(targetCurrency)
-        hasher.combine(baseToTargetCurrencyConversionRate)
+        hasher.combine(sourceToTargetRate)
     }
 }
