@@ -11,40 +11,57 @@ import XCTest
 
 class CurrencyConverterTests: XCTestCase {
 
-    var converter: CurrencyConverter!
+    let euroToPoundRate = CurrencyExchangeRate(sourceCurrency: .euro,
+                                               targetCurrency: .poundSterling,
+                                               allowsInverseConversion: true,
+                                               sourceToTargetRate: 0.87295)
 
-    override func setUp() {
-        let euroToPoundRate = CurrencyExchangeRate(sourceCurrency: .euro,
-                                                   targetCurrency: .poundSterling,
-                                                   sourceToTargetRate: 0.87295)
+    let euroToUSDollarRate = CurrencyExchangeRate(sourceCurrency: .euro,
+                                                  targetCurrency: .usDollar,
+                                                  allowsInverseConversion: true,
+                                                  sourceToTargetRate: 1.12979)
 
-        let euroToUSDollarRate = CurrencyExchangeRate(sourceCurrency: .euro,
-                                                      targetCurrency: .usDollar,
-                                                      sourceToTargetRate: 1.12979)
+    let poundToUSDollarRate = CurrencyExchangeRate(sourceCurrency: .poundSterling,
+                                                   targetCurrency: .usDollar,
+                                                   allowsInverseConversion: true,
+                                                   sourceToTargetRate: 1.29422)
 
-        let poundToUSDollarRate = CurrencyExchangeRate(sourceCurrency: .poundSterling,
-                                                       targetCurrency: .usDollar,
-                                                       sourceToTargetRate: 1.30021)
-
-        converter = CurrencyConverter(baseCurrency: .euro,
-                                      targetCurrencyExchangeRates: [euroToPoundRate,
-                                                                    euroToUSDollarRate])
+    func testConversionWithNilRates() {
+        let converter = CurrencyConverter(baseCurrency: .euro,
+                                          currencyExchangeRates: [])
+        let twoPounds = Money(value: 2, currency: .poundSterling)
+        let twoPoundsInDollars = converter.convert(money: twoPounds, to: .usDollar)
+        XCTAssert (twoPoundsInDollars == nil)
     }
 
-    override func tearDown() {
+    func testDirectConversionFromSourceToTargetCurrency() {
 
-        converter = nil
-    }
+        let converter = CurrencyConverter(currencyExchangeRates: [euroToUSDollarRate])
 
-    func testConversionFromBaseToTargetCurrency() {
         let twoEuroAndChange = Money(value: 2.13, currency: .euro)
-        guard let twoEuroAndChangeInUSDollars = converter.convert(money: twoEuroAndChange, to: .usDollar) else {
+        guard let twoEuroAndChangeInUSDollars = converter.convert(money: twoEuroAndChange,
+                                                                  to: .usDollar) else {
             XCTAssert(false); return
         }
-        XCTAssert (twoEuroAndChangeInUSDollars.value == 2.41)
+        print(twoEuroAndChangeInUSDollars)
+        XCTAssert (twoEuroAndChangeInUSDollars == Money(value: 2.41, currency: .usDollar))
     }
 
-    func testBackConversion() {
+    func testDirectInverseConversionFromSourceToTargetCurrency() {
+
+        let converter = CurrencyConverter(currencyExchangeRates: [euroToUSDollarRate])
+
+        let twoDollarsAndChange = Money(value: 2.41, currency: .usDollar)
+        guard let twoDollarsAndChangeInEuro = converter.convert(money: twoDollarsAndChange,
+                                                                to: .euro) else {
+            XCTAssert(false); return
+        }
+        XCTAssert (twoDollarsAndChangeInEuro == Money(value: 2.13, currency: .euro))
+    }
+
+    func testDirectToAndBackConversion() {
+        let converter = CurrencyConverter(currencyExchangeRates: [euroToUSDollarRate])
+
         let twoEuro = Money(value: 2, currency: .euro)
         guard let twoEuroInUSDollars = converter.convert(money: twoEuro,
                                                          to: .usDollar) else {
@@ -58,30 +75,9 @@ class CurrencyConverterTests: XCTestCase {
         XCTAssert (twoEuroBackConversionValue.value == 2)
     }
 
-    func testConversionFromTargetToBaseCurrency() {
-        let twoDollarsAndChange = Money(value: 2.26, currency: .usDollar)
-        guard let twoDollarsAndChangeInEuro = converter.convert(money: twoDollarsAndChange,
-                                                                to: .euro) else {
-            XCTAssert(false); return
-        }
-        XCTAssert(twoDollarsAndChangeInEuro == Money(value: 2, currency: .euro))
-    }
-
-    func testConversionFromTargetToBaseCurrencyBackConversion() {
-        let twoDollarsAndChange = Money(value: 2.26, currency: .usDollar)
-        guard let twoDollarsAndChangeInEuro = converter.convert(money: twoDollarsAndChange,
-                                                                to: .euro) else {
-                                                                    XCTAssert(false); return
-        }
-
-        guard let twoEuroBackConversionValue = converter.convert(money: twoDollarsAndChangeInEuro,
-                                                                 to: .usDollar) else {
-                                                                    XCTAssert(false); return
-        }
-        XCTAssert (twoEuroBackConversionValue == Money(value: 2.26, currency: .usDollar))
-    }
-
-    func testConvertToBaseCurrencyFromBaseCurrency() {
+    func testConversionFromBaseCurrencyToBaseCurrency() {
+        let converter = CurrencyConverter(baseCurrency: .euro,
+                                          currencyExchangeRates: [euroToUSDollarRate])
         let twoEuroAndChange = Money(value: 2.13, currency: .euro)
         guard let convertedTwoEuroAndChange = converter.convertMoneyToBaseCurrency(money: twoEuroAndChange) else {
             XCTAssert(false); return
@@ -89,19 +85,44 @@ class CurrencyConverterTests: XCTestCase {
         XCTAssert (convertedTwoEuroAndChange == twoEuroAndChange)
     }
 
-    func testConvertToTargetCurrencyFromBaseCurrency() {
-        let twoEuroAndChange = Money(value: 2.13, currency: .euro)
-        guard let convertedTwoEuroAndChange = converter.convert(money: twoEuroAndChange, to: .euro) else {
-            XCTAssert(false); return
-        }
-        XCTAssert (convertedTwoEuroAndChange == twoEuroAndChange)
-    }
-
-    func testConvertToBaseCurrencyFromAnotherCurrency() {
+    func testConversionFromCurrencyToBaseCurrency() {
+        let converter = CurrencyConverter(baseCurrency: .euro,
+                                          currencyExchangeRates: [euroToUSDollarRate])
         let twoDollarsAndChange = Money(value: 2.26, currency: .usDollar)
         guard let twoDollarsAndChangeInEuro = converter.convertMoneyToBaseCurrency(money: twoDollarsAndChange) else {
             XCTAssert(false); return
         }
         XCTAssert (twoDollarsAndChangeInEuro == Money(value: 2, currency: .euro))
+    }
+
+    func testConversionFromCurrencyToSameCurrency() {
+        let converter = CurrencyConverter(baseCurrency: nil,
+                                          currencyExchangeRates: [euroToUSDollarRate])
+        let twoEuroAndChange = Money(value: 2.13, currency: .euro)
+        guard let convertedTwoEuroAndChange = converter.convert(money: twoEuroAndChange,
+                                                                to: .euro)
+            else {
+            XCTAssert(false); return
+        }
+        XCTAssert (convertedTwoEuroAndChange == twoEuroAndChange)
+    }
+
+    func testIndirectConversionFromCurrencyToAnotherCurrency() {
+        let converter = CurrencyConverter(baseCurrency: .euro,
+                                          currencyExchangeRates: [euroToUSDollarRate,
+                                                                  euroToPoundRate])
+        let twoPounds = Money(value: 2, currency: .poundSterling)
+        let twoPoundsInDollars = converter.convert(money: twoPounds, to: .usDollar)
+        XCTAssert ( twoPoundsInDollars == Money(value: 2.59,
+                                                currency: .usDollar))
+    }
+
+    func testDirectConversionFromCurrencyToAnotherCurrencyWithDifferentBase() {
+        let converter = CurrencyConverter(baseCurrency: .euro,
+                                          currencyExchangeRates: [poundToUSDollarRate])
+        let twoPounds = Money(value: 2, currency: .poundSterling)
+        let twoPoundsInDollars = converter.convert(money: twoPounds, to: .usDollar)
+        XCTAssert ( twoPoundsInDollars == Money(value: 2.59,
+                                                currency: .usDollar))
     }
 }

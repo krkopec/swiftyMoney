@@ -4,19 +4,55 @@
 //
 //  Created by Krystian Kopeć on 02/03/2019.
 //  Copyright © 2019 Krystian Kopeć. All rights reserved.
-//
-//  Defines Currency struct. To make it easier to use various currencies,
-//  it struct can be extended with a public static property defining
-//  a specific currency.
+// 
 
 import Foundation
 
 /// A structure representing the concept of a currency.
-public struct Currency {
+public class Currency {
+
+    /// A property that specifies the Currency's localizable name, e.g. "US Dollar"
     public let name: String
+
+    /// A property that specifies the Currency's international ISO code, e.g. USD for US dollar.
     public let code: String
-    public let unitSymbol: CurrencySymbol
-    public let subunitSymbol: CurrencySymbol?
+
+    /// A property that defines the Currency's subunit symbol and its rounding scale.
+    public var subunit: CurrencySubunit?
+
+    /// A property that defines the Currency's symbol, e.g. "$" for US dollar.
+    public let symbol: String
+
+    // A property that handles the decimal number behaviour used by the currency
+    public var decimalHandler: NSDecimalNumberHandler
+
+    public init(name: String, code: String, symbol: String, subunit: CurrencySubunit?) {
+
+        self.name = name
+        self.code = code
+        self.symbol = symbol
+        self.subunit = subunit
+
+        if let subunit = subunit {
+            decimalHandler = NSDecimalNumberHandler(roundingMode: .bankers,
+                                                    scale: Int16(subunit.roundingScale),
+                                                    raiseOnExactness: true,
+                                                    raiseOnOverflow: true,
+                                                    raiseOnUnderflow: true,
+                                                    raiseOnDivideByZero: false)
+        } else {
+            decimalHandler = NSDecimalNumberHandler(roundingMode: .bankers,
+                                                    scale: Int16(0),
+                                                    raiseOnExactness: true,
+                                                    raiseOnOverflow: true,
+                                                    raiseOnUnderflow: true,
+                                                    raiseOnDivideByZero: false)
+        }
+    }
+
+    public func setDecimalHandler(to decimalHandler: NSDecimalNumberHandler) {
+        self.decimalHandler = decimalHandler
+    }
 }
 
 extension Currency: Equatable {
@@ -29,7 +65,7 @@ extension Currency: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(name)
         hasher.combine(code)
-        hasher.combine(unitSymbol)
-        hasher.combine(subunitSymbol)
+        hasher.combine(symbol)
+        hasher.combine(subunit)
     }
 }

@@ -12,32 +12,33 @@ import Foundation
 /// A structure representing the concept of money.
 public struct Money {
 
-    public let value: Decimal
+    public var value: Decimal {
+        return NSDecimalNumber(decimal: _value).rounding(accordingToBehavior: currency.decimalHandler) as Decimal
+    }
+
     public let currency: Currency
 
-    public static let decimalHandler = NSDecimalNumberHandler(roundingMode: .bankers,
-                                                              scale: 2,
-                                                              raiseOnExactness: true,
-                                                              raiseOnOverflow: true,
-                                                              raiseOnUnderflow: true,
-                                                              raiseOnDivideByZero: false)
-
-    // needs to be set, if currency conversion is to be done directly on Money struct
-    public static var currencyConverter: CurrencyConverter?
+    // Static property used for currency conversion directly on the Money struct; must not be nil if any conversions are to be done
+    public private(set) static var currencyConverter: CurrencyConverter?
+    private let _value: Decimal
 
     public init(value: Decimal, currency: Currency) {
         self.currency = currency
-        self.value = NSDecimalNumber(decimal: value).rounding(accordingToBehavior: Money.decimalHandler) as Decimal
+        self._value = value
     }
 
     public init(value: Double, currency: Currency) {
         self.currency = currency
-        self.value = NSDecimalNumber(floatLiteral: value).rounding(accordingToBehavior: Money.decimalHandler) as Decimal
+        self._value = Decimal(value)
     }
 
     public init(value: Int, currency: Currency) {
         self.currency = currency
-        self.value = NSDecimalNumber(integerLiteral: value).rounding(accordingToBehavior: Money.decimalHandler) as Decimal
+        self._value = Decimal(value)
+    }
+
+    public static func setCurrencyConverter(to currencyConverter: CurrencyConverter?) {
+        self.currencyConverter = currencyConverter
     }
 }
 
@@ -50,17 +51,19 @@ extension Money: Equatable {
 // Currency conversion methods; may return nil if currencyConverter is not set
 extension Money {
 
-    /// Converts money to the base currency specifies in the Money's static currency converter
+    /// A method that converts money to the base currency specified in Money's static currency converter
     func convertedToBaseCurrency() -> Money? {
 
-        guard let converter = Money.currencyConverter else {
+        guard let converter = Money.currencyConverter,
+              let baseCurrency = converter.baseCurrency
+        else {
             print("Money.currencyConverter is nil")
             return nil
         }
-        return converter.convert(money: self, to: converter.baseCurrency)
+        return converter.convert(money: self, to: baseCurrency)
     }
 
-    /// Converts money to another currency, according to conversion rates specified by Money's static currency converter
+    /// A method that converts money to another currency, according to conversion rates specified in Money's static currency converter
     func converted(to currency: Currency) -> Money? {
 
         guard let converter = Money.currencyConverter else {
@@ -71,11 +74,12 @@ extension Money {
     }
 }
 
-// When performing subtraction and addition on monies, the result is returned:
-// 1. in original currency if both amounts have the same currency,
-// 2. in converter's base currency if the amounts have different currencies
+// When performing subtraction and addition on Money, the result will be returned:
+// 1. in original currency if both amounts are in the same currency,
+// 2. in converter's base currency if the amounts are in different currencies
 // and a currency converter was set
-// 3. as nil if they have different currencies and no currency converter was set
+// 3. as nil value if they are in different currencies and no currency converter or no
+// corresponding currency exchange rates were set
 
 extension Money {
     public static func + (lhs: Money, rhs: Money) -> Money? {
