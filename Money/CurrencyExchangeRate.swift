@@ -31,6 +31,35 @@ public struct CurrencyExchangeRate {
             return nil
         }
     }
+
+    public init(sourceCurrency: Currency, targetCurrency: Currency, allowsInverseConversion: Bool, sourceToTargetRate: Decimal) {
+        self.sourceCurrency = sourceCurrency
+        self.targetCurrency = targetCurrency
+        self.allowsInverseConversion = allowsInverseConversion
+        self.sourceToTargetRate = sourceToTargetRate
+    }
+
+    public init(sourceCurrency: Currency, targetCurrency: Currency, allowsInverseConversion: Bool, sourceToTargetRate: Double) {
+        self.sourceCurrency = sourceCurrency
+        self.targetCurrency = targetCurrency
+        self.allowsInverseConversion = allowsInverseConversion
+        self.sourceToTargetRate = Decimal(sourceToTargetRate)
+           print(self)
+    }
+
+    public init(sourceCurrency: Currency, targetCurrency: Currency, allowsInverseConversion: Bool, sourceToTargetRate: Int) {
+        self.sourceCurrency = sourceCurrency
+        self.targetCurrency = targetCurrency
+        self.allowsInverseConversion = allowsInverseConversion
+        self.sourceToTargetRate = Decimal(sourceToTargetRate)
+           print(self)
+    }
+}
+
+extension CurrencyExchangeRate: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return "CurrencyExchangeRate(sourceCurrency: \(sourceCurrency.name), targetCurrency: \(targetCurrency.name), sourceToTargetRate: \(sourceToTargetRate), allowsInverseConversion: \(allowsInverseConversion))"
+    }
 }
 
 extension CurrencyExchangeRate: Equatable {

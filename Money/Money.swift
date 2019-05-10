@@ -69,11 +69,17 @@ extension Money: Comparable {
     }
 }
 
+extension Money: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return "Money(value: \(value), currency: \(currency.name))"
+    }
+}
+
 // Currency conversion methods; may return nil if currencyConverter has not been set
 extension Money {
 
     /// A method that converts money to the base currency specified in Money's static currency converter
-    func convertedToBaseCurrency() -> Money? {
+    public func convertedToBaseCurrency() -> Money? {
 
         guard let converter = Money.currencyConverter,
             let baseCurrency = converter.baseCurrency
@@ -85,7 +91,7 @@ extension Money {
     }
 
     /// A method that converts money to another currency, according to conversion rates specified in Money's static currency converter
-    func converted(to currency: Currency) -> Money? {
+    public func converted(to currency: Currency) -> Money? {
 
         guard let converter = Money.currencyConverter else {
             print("Money.currencyConverter is nil")
@@ -113,9 +119,8 @@ extension Money {
                 return nil
             }
 
-            guard let lhsInBaseCurrency = currencyConverter?.convertMoneyToBaseCurrency(money: lhs),
-                let rhsInBaseCurrency = currencyConverter?.convertMoneyToBaseCurrency(money: rhs)
-                else {
+            guard let lhsInBaseCurrency = lhs.convertedToBaseCurrency(),
+                let rhsInBaseCurrency = rhs.convertedToBaseCurrency()  else {
                     print("Could not convert money to currency converter's base currency")
                     return nil
             }
@@ -123,6 +128,7 @@ extension Money {
             return lhsInBaseCurrency + rhsInBaseCurrency
         }
     }
+
     public static func - (lhs: Money, rhs: Money) -> Money? {
 
         if lhs.currency == rhs.currency {

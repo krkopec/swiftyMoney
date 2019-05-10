@@ -25,9 +25,9 @@ class MoneyWithConversion: XCTestCase {
                                                    sourceToTargetRate: 1.29422)
 
     let euroToKronaRate = CurrencyExchangeRate(sourceCurrency: .euro,
-                                                  targetCurrency: .swedishKrona,
-                                                  allowsInverseConversion: true,
-                                                  sourceToTargetRate: 10.7405)
+                                               targetCurrency: .swedishKrona,
+                                               allowsInverseConversion: true,
+                                               sourceToTargetRate: 10.7405)
 
     func testSameCurrencyAdditionWithDifferentCurrencies() {
 
