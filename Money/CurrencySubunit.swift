@@ -15,6 +15,11 @@ public struct CurrencySubunit {
 
     /// A property that specifies the number of allowable decimal places ; 0 means no decimal values and no subunit symbols are permitted.
     let roundingScale: Int
+
+    public init(symbol: String, roundingScale: Int) {
+        self.symbol = symbol
+        self.roundingScale = roundingScale
+    }
 }
 
 extension CurrencySubunit: Hashable {

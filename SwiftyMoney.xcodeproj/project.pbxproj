@@ -9,13 +9,10 @@
 /* Begin PBXBuildFile section */
 		0820068C22762DE0004F6F58 /* CurrencyExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820068B22762DE0004F6F58 /* CurrencyExchangeRate.swift */; };
 		0820068F2276336B004F6F58 /* CurrencyExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820068B22762DE0004F6F58 /* CurrencyExchangeRate.swift */; };
-		082083D92275D1C9002E009C /* PredefinedCurrencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082083D82275D1C9002E009C /* PredefinedCurrencies.swift */; };
-		082083DA2275D1C9002E009C /* PredefinedCurrencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082083D82275D1C9002E009C /* PredefinedCurrencies.swift */; };
 		082083DE2275F386002E009C /* CurrencyConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082083DD2275F386002E009C /* CurrencyConverterTests.swift */; };
-		084EDA4A2279C0BC0013546F /* PropertyListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084EDA492279C0BC0013546F /* PropertyListLoader.swift */; };
 		084EDA4B2279C0BC0013546F /* PropertyListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084EDA492279C0BC0013546F /* PropertyListLoader.swift */; };
 		084EDA502279C39C0013546F /* PropertyListLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084EDA4F2279C39C0013546F /* PropertyListLoaderTests.swift */; };
-		08568D332267BF71002D70D9 /* Money.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08568D292267BF71002D70D9 /* Money.framework */; };
+		08568D332267BF71002D70D9 /* SwiftyMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08568D292267BF71002D70D9 /* SwiftyMoney.framework */; };
 		08568D382267BF71002D70D9 /* MoneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08568D372267BF71002D70D9 /* MoneyTests.swift */; };
 		08568D3A2267BF71002D70D9 /* Money.h in Headers */ = {isa = PBXBuildFile; fileRef = 08568D2C2267BF71002D70D9 /* Money.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		08568D442267BF8F002D70D9 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08568D432267BF8F002D70D9 /* Currency.swift */; };
@@ -31,6 +28,7 @@
 		08C16AEA227B773400B1FEFA /* MoneyWithConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C16AE9227B773400B1FEFA /* MoneyWithConversion.swift */; };
 		08E7C3B4228211C200FD2592 /* CurrencySubunit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E7C3B3228211C200FD2592 /* CurrencySubunit.swift */; };
 		08E7C3B5228211C200FD2592 /* CurrencySubunit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E7C3B3228211C200FD2592 /* CurrencySubunit.swift */; };
+		08E7C3DB2282300900FD2592 /* PredefinedCurrencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E7C3DA2282300900FD2592 /* PredefinedCurrencies.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,14 +43,13 @@
 
 /* Begin PBXFileReference section */
 		0820068B22762DE0004F6F58 /* CurrencyExchangeRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyExchangeRate.swift; sourceTree = "<group>"; };
-		082083D82275D1C9002E009C /* PredefinedCurrencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PredefinedCurrencies.swift; path = ../PredefinedCurrencies.swift; sourceTree = "<group>"; };
 		082083DD2275F386002E009C /* CurrencyConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterTests.swift; sourceTree = "<group>"; };
 		084EDA492279C0BC0013546F /* PropertyListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListLoader.swift; sourceTree = "<group>"; };
 		084EDA4F2279C39C0013546F /* PropertyListLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListLoaderTests.swift; sourceTree = "<group>"; };
-		08568D292267BF71002D70D9 /* Money.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Money.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		08568D292267BF71002D70D9 /* SwiftyMoney.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyMoney.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		08568D2C2267BF71002D70D9 /* Money.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Money.h; sourceTree = "<group>"; };
 		08568D2D2267BF71002D70D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		08568D322267BF71002D70D9 /* MoneyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoneyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		08568D322267BF71002D70D9 /* SwiftyMoneyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyMoneyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08568D372267BF71002D70D9 /* MoneyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTests.swift; sourceTree = "<group>"; };
 		08568D392267BF71002D70D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08568D432267BF8F002D70D9 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
@@ -63,6 +60,7 @@
 		08C16AE9227B773400B1FEFA /* MoneyWithConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyWithConversion.swift; sourceTree = "<group>"; };
 		08E23D132279CFEC001F5B30 /* eurExchangeRates.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = eurExchangeRates.plist; sourceTree = "<group>"; };
 		08E7C3B3228211C200FD2592 /* CurrencySubunit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySubunit.swift; sourceTree = "<group>"; };
+		08E7C3DA2282300900FD2592 /* PredefinedCurrencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedCurrencies.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,21 +75,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08568D332267BF71002D70D9 /* Money.framework in Frameworks */,
+				08568D332267BF71002D70D9 /* SwiftyMoney.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		082083DC2275D1EE002E009C /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				082083D82275D1C9002E009C /* PredefinedCurrencies.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		08568D1F2267BF71002D70D9 = {
 			isa = PBXGroup;
 			children = (
@@ -104,8 +94,8 @@
 		08568D2A2267BF71002D70D9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				08568D292267BF71002D70D9 /* Money.framework */,
-				08568D322267BF71002D70D9 /* MoneyTests.xctest */,
+				08568D292267BF71002D70D9 /* SwiftyMoney.framework */,
+				08568D322267BF71002D70D9 /* SwiftyMoneyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,9 +110,7 @@
 				08A37E03227F4B2300AEA5C4 /* CurrencyFormatter.swift */,
 				08E7C3B3228211C200FD2592 /* CurrencySubunit.swift */,
 				08568D502267C5FC002D70D9 /* Money.swift */,
-				084EDA492279C0BC0013546F /* PropertyListLoader.swift */,
 				08568D2D2267BF71002D70D9 /* Info.plist */,
-				082083DC2275D1EE002E009C /* Extensions */,
 			);
 			path = Money;
 			sourceTree = "<group>";
@@ -131,14 +119,24 @@
 			isa = PBXGroup;
 			children = (
 				08E23D132279CFEC001F5B30 /* eurExchangeRates.plist */,
+				084EDA492279C0BC0013546F /* PropertyListLoader.swift */,
 				082083DD2275F386002E009C /* CurrencyConverterTests.swift */,
 				08568D372267BF71002D70D9 /* MoneyTests.swift */,
 				08C16AE9227B773400B1FEFA /* MoneyWithConversion.swift */,
 				08A37E09227F4BAD00AEA5C4 /* MoneyFormatterTests.swift */,
 				084EDA4F2279C39C0013546F /* PropertyListLoaderTests.swift */,
 				08568D392267BF71002D70D9 /* Info.plist */,
+				08E7C3DC2282304300FD2592 /* Extensions */,
 			);
 			path = MoneyTests;
+			sourceTree = "<group>";
+		};
+		08E7C3DC2282304300FD2592 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				08E7C3DA2282300900FD2592 /* PredefinedCurrencies.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,9 +153,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		08568D282267BF71002D70D9 /* Money */ = {
+		08568D282267BF71002D70D9 /* SwiftyMoney */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 08568D3D2267BF71002D70D9 /* Build configuration list for PBXNativeTarget "Money" */;
+			buildConfigurationList = 08568D3D2267BF71002D70D9 /* Build configuration list for PBXNativeTarget "SwiftyMoney" */;
 			buildPhases = (
 				08568D242267BF71002D70D9 /* Headers */,
 				08568D252267BF71002D70D9 /* Sources */,
@@ -168,14 +166,14 @@
 			);
 			dependencies = (
 			);
-			name = Money;
+			name = SwiftyMoney;
 			productName = Money;
-			productReference = 08568D292267BF71002D70D9 /* Money.framework */;
+			productReference = 08568D292267BF71002D70D9 /* SwiftyMoney.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		08568D312267BF71002D70D9 /* MoneyTests */ = {
+		08568D312267BF71002D70D9 /* SwiftyMoneyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 08568D402267BF71002D70D9 /* Build configuration list for PBXNativeTarget "MoneyTests" */;
+			buildConfigurationList = 08568D402267BF71002D70D9 /* Build configuration list for PBXNativeTarget "SwiftyMoneyTests" */;
 			buildPhases = (
 				08568D2E2267BF71002D70D9 /* Sources */,
 				08568D2F2267BF71002D70D9 /* Frameworks */,
@@ -186,9 +184,9 @@
 			dependencies = (
 				08568D352267BF71002D70D9 /* PBXTargetDependency */,
 			);
-			name = MoneyTests;
+			name = SwiftyMoneyTests;
 			productName = MoneyTests;
-			productReference = 08568D322267BF71002D70D9 /* MoneyTests.xctest */;
+			productReference = 08568D322267BF71002D70D9 /* SwiftyMoneyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -210,7 +208,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 08568D232267BF71002D70D9 /* Build configuration list for PBXProject "Money" */;
+			buildConfigurationList = 08568D232267BF71002D70D9 /* Build configuration list for PBXProject "SwiftyMoney" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -222,8 +220,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				08568D282267BF71002D70D9 /* Money */,
-				08568D312267BF71002D70D9 /* MoneyTests */,
+				08568D282267BF71002D70D9 /* SwiftyMoney */,
+				08568D312267BF71002D70D9 /* SwiftyMoneyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -254,8 +252,6 @@
 				0820068C22762DE0004F6F58 /* CurrencyExchangeRate.swift in Sources */,
 				08A37E04227F4B2300AEA5C4 /* CurrencyFormatter.swift in Sources */,
 				08568D4E2267C51D002D70D9 /* CurrencyConverter.swift in Sources */,
-				084EDA4A2279C0BC0013546F /* PropertyListLoader.swift in Sources */,
-				082083D92275D1C9002E009C /* PredefinedCurrencies.swift in Sources */,
 				08E7C3B4228211C200FD2592 /* CurrencySubunit.swift in Sources */,
 				08568D512267C5FC002D70D9 /* Money.swift in Sources */,
 				08568D442267BF8F002D70D9 /* Currency.swift in Sources */,
@@ -267,10 +263,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				08A37E05227F4B2300AEA5C4 /* CurrencyFormatter.swift in Sources */,
-				082083DA2275D1C9002E009C /* PredefinedCurrencies.swift in Sources */,
 				08C16AEA227B773400B1FEFA /* MoneyWithConversion.swift in Sources */,
 				08A37E0B227F4BAD00AEA5C4 /* MoneyFormatterTests.swift in Sources */,
 				08568D4F2267C51D002D70D9 /* CurrencyConverter.swift in Sources */,
+				08E7C3DB2282300900FD2592 /* PredefinedCurrencies.swift in Sources */,
 				08568D532267D011002D70D9 /* Currency.swift in Sources */,
 				084EDA4B2279C0BC0013546F /* PropertyListLoader.swift in Sources */,
 				08568D522267C5FC002D70D9 /* Money.swift in Sources */,
@@ -287,7 +283,7 @@
 /* Begin PBXTargetDependency section */
 		08568D352267BF71002D70D9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 08568D282267BF71002D70D9 /* Money */;
+			target = 08568D282267BF71002D70D9 /* SwiftyMoney */;
 			targetProxy = 08568D342267BF71002D70D9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -433,7 +429,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = kr.kopec.Money;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.kopec.SwiftyMoney;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -460,7 +456,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = kr.kopec.Money;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.kopec.SwiftyMoney;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -509,7 +505,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		08568D232267BF71002D70D9 /* Build configuration list for PBXProject "Money" */ = {
+		08568D232267BF71002D70D9 /* Build configuration list for PBXProject "SwiftyMoney" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				08568D3B2267BF71002D70D9 /* Debug */,
@@ -518,7 +514,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		08568D3D2267BF71002D70D9 /* Build configuration list for PBXNativeTarget "Money" */ = {
+		08568D3D2267BF71002D70D9 /* Build configuration list for PBXNativeTarget "SwiftyMoney" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				08568D3E2267BF71002D70D9 /* Debug */,
@@ -527,7 +523,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		08568D402267BF71002D70D9 /* Build configuration list for PBXNativeTarget "MoneyTests" */ = {
+		08568D402267BF71002D70D9 /* Build configuration list for PBXNativeTarget "SwiftyMoneyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				08568D412267BF71002D70D9 /* Debug */,

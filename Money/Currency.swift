@@ -4,23 +4,23 @@
 //
 //  Created by Krystian Kopeć on 02/03/2019.
 //  Copyright © 2019 Krystian Kopeć. All rights reserved.
-// 
+//
 
 import Foundation
 
 /// A structure representing the concept of a currency.
 public class Currency {
 
-    /// A property that specifies the Currency's localizable name, e.g. "US Dollar"
+    /// A property representing Currency's localizable name, e.g. "US Dollar"
     public let name: String
 
-    /// A property that specifies the Currency's international ISO code, e.g. USD for US dollar.
+    /// A property representing Currency's international ISO code, e.g. USD for US dollar.
     public let code: String
 
-    /// A property that defines the Currency's subunit symbol and its rounding scale.
+    /// A property representing Currency's subunit symbol and its rounding scale.
     public var subunit: CurrencySubunit?
 
-    /// A property that defines the Currency's symbol, e.g. "$" for US dollar.
+    /// A property representing Currency's main symbol, e.g. "$" for US dollar.
     public let symbol: String
 
     // A property that handles the decimal number behaviour used by the currency
@@ -50,6 +50,7 @@ public class Currency {
         }
     }
 
+    /// A function that makes it possible to modify Currency's decimal number handler
     public func setDecimalHandler(to decimalHandler: NSDecimalNumberHandler) {
         self.decimalHandler = decimalHandler
     }

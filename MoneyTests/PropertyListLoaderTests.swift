@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Money
+@testable import SwiftyMoney
 
 public struct CurrencyExchangeRatePackage: Codable {
     let baseCurrencyCode: String

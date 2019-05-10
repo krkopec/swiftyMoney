@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Money
+@testable import SwiftyMoney
 
 class MoneyTests: XCTestCase {
 

@@ -11,16 +11,16 @@ import Foundation
 /// A struct representing a currency exchange rate.
 public struct CurrencyExchangeRate {
 
-    /// A property that specifies the currency that conversion calculations are performed from
+    /// A property representing the currency that conversion calculations are performed from
     let sourceCurrency: Currency
 
-    /// A property that specifies the currency that conversion calculations are performed to
+    /// A property representing the currency that conversion calculations are performed to
     let targetCurrency: Currency
 
-    /// A property that specifies whether targetToSourceRate may be calculated as an inverse of sourceToTargetRate
+    /// A property specifying whether targetToSourceRate may be calculated as an inverse of sourceToTargetRate
     let allowsInverseConversion: Bool
 
-    /// A property that specifies sourceCurrency-to-targetCurrency conversion rate
+    /// A property representing sourceCurrency-to-targetCurrency conversion rate
     let sourceToTargetRate: Decimal
 
     /// A computed property that provides inverse targetCurrency-to-sourceCurrency conversion rate, if allowed
