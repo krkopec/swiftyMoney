@@ -30,18 +30,18 @@ In order to create an instance of Currency, you must provide:
 1. its name, which may be used for the presentation layer of your application and/or for debugging purposes, 
 2. its international ISO code, which may be used for identification of the currency and its interoperatility with third-party currency exchange rate sources,
 3. its local symbol, which will be used for formatting money strings, and
-4. its subunit, which is an optional field that specifies the currency's local subunit symbol, e.g. cent for US dollar, and its scale. The roundingScale property ensures that money amount is provided with a correct number of decimal places, if any. If the subunit property is set to nil, money will be provided, to all intents and purposes, as an integer.
+4. its exponent property ensures that money amount is provided with a correct number of decimal places, if any. If the exponent property is set to 0, money will be provided, to all intents and purposes, as an integer.
 
 ```
 let euro = Currency(name: "Euro", 
                     code: "EUR", 
                     symbol: "€", 
-                    subunit: CurrencySubunit(symbol: "c", roundingScale: 2))
+                    exponent: 2)
                                     
 let swedishKrona = Currency(name: "Swedish krona", 
                             code: "SEK", 
                             symbol: "kr", 
-                            subunit: nil)
+                            exponent: 0)
 ```
 
 In order to ease the management of different currencies, it is advisable to extend the Currency class by using static properties, as follows:
@@ -53,8 +53,7 @@ extension Currency {
 public static let polishZloty = Currency(name: "Polish zloty",
                                          code: "PLN",
                                          symbol: "zł",
-                                         subunit: CurrencySubunit(symbol: "gr",
-                                                                  roundingScale: 2))
+                                         exponent: 2)
 }
 ```
 In this way, you will be able to use a currency in a manner similar to an enumeration, as presented below:
