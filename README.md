@@ -51,10 +51,10 @@ In order to ease the management of different currencies, it is advisable to exte
 extension Currency {
 
 public static let polishZloty = Currency(name: "Polish zloty",
-                                             code: "PLN",
-                                             symbol: "zł",
-                                             subunit: CurrencySubunit(symbol: "gr",
-                                                                      roundingScale: 2))
+                                         code: "PLN",
+                                         symbol: "zł",
+                                         subunit: CurrencySubunit(symbol: "gr",
+                                                                  roundingScale: 2))
 }
 ```
 In this way, you will be able to use a currency in a manner similar to an enumeration, as presented below:
@@ -80,9 +80,9 @@ Money conforms to the Equatable and Comparable protocols, so that it is possible
 
 ### Comparing monies of the same currency
 ```
-Money(value: 10, currency: .euro) == Money(value: 10, currency: .euro) // equals to true
-Money(value: 10, currency: .euro) != Money(value: 10, currency: .euro) // equals to false
-Money(value: 10, currency: .euro) < Money(value: 10, currency: .euro)  // equals to false
+Money(value: 10, currency: .euro) == Money(value: 10, currency: .euro) // == true
+Money(value: 10, currency: .euro) != Money(value: 10, currency: .euro) // == false
+Money(value: 10, currency: .euro) < Money(value: 10, currency: .euro)  // == false
 ```
 
 ### Comparing monies of different currencies
@@ -103,29 +103,29 @@ Money(value: 10, currency: .euro) < Money(value: 10, currency: .usDollar)
 Basic arithmetic examples:
 
   ```
-Money(value: 10, currency: .euro) + Money(value: 10, currency: .euro) // equals to Money(value: 20, currency: .euro)
-Money(value: 10, currency: .euro) - Money(value: 5, currency: .euro)  // equals to Money(value: 5, currency: .euro)
-Money(value: 10, currency: .euro) * 2 // equals to Money(value: 20, currency: .euro)
-Money(value: 10, currency: .euro) / 2 // equals to Money(value: 5, currency: .euro)
+Money(value: 10, currency: .euro) + Money(value: 10, currency: .euro) // == 20 euro
+Money(value: 10, currency: .euro) - Money(value: 5, currency: .euro)  // == 5 euro
+Money(value: 10, currency: .euro) * 2 // == 20 euro
+Money(value: 10, currency: .euro) / 2 // == 5 euro
 ```
 
 As with comparisons, you can perform mathematical operation on monies of the same or different currencies. 
 Depending on the circumstance, the result of addition or subtraction of any money amounts may be returned:
   1. in original currency if both amounts are in the same currency:
   ```
-  Money(value: 10, currency: .euro) + Money(value: 10, currency: .euro) // equals to Money(value: 20, currency: .euro)
+  Money(value: 10, currency: .euro) + Money(value: 10, currency: .euro) // == 20 euro
   ```
 
   2. in converter's base currency if the amounts are in different currencies and Money's currency converter and corresponding currency exchange rates were set:
   ```
   // Money.currencyConverter.baseCurrency == .euro and eurToUsdConversionRate == 1.12979
-  Money(value: 10, currency: .euro) + Money(value: 10, currency: .usDollar) // equals to Money(value: 18.85, currency: .euro)
+  Money(value: 10, currency: .euro) + Money(value: 10, currency: .usDollar) // == 18.85 euro
   ```
   
   3. as nil value if amounts are in different currencies and no currency converter or no corresponding currency exchange rates were set.
   ```
   // Money.currencyConverter.baseCurrency == nil 
-  Money(value: 10, currency: .euro) + Money(value: 10, currency: .usDollar) // equals to nil
+  Money(value: 10, currency: .euro) + Money(value: 10, currency: .usDollar) // == nil
   ```
   
 ## Currency Conversion
@@ -148,7 +148,9 @@ let converter = CurrencyConverter(currencyExchangeRates: [euroToUSDollarRate])
 ```
 // set converter to convert between a number of currencies through common Euro conversion rate.
 let converter = CurrencyConverter(baseCurrency: .euro,
-                                  currencyExchangeRates: [euroToUSDollarRate, euroToPolishZloty, euroToSwedishKronaRate])
+                                  currencyExchangeRates: [euroToUSDollarRate, 
+                                                          euroToPolishZloty, 
+                                                          euroToSwedishKronaRate])
 ```
 
 ### Create Currency Exchange Rate
@@ -161,7 +163,7 @@ let euroToKronaRate = CurrencyExchangeRate(sourceCurrency: .euro,
                                            allowsInverseConversion: true,
                                            sourceToTargetRate: 10.7405)
 
-// if the allowsInverseConversion property true, then targetToSourceRate == 1 / 10/7405
+// if the allowsInverseConversion property true, then targetToSourceRate == 1 / 10.7405
 ```
 
 As suggested in the comment above, thanks to the allowsInverseConversion property, CurrencyExchangeRate allows for converting money in one direction (e.g. from EUR to USD) or in two directions (e.g. from EUR to USD and USD to EUR) using one currency exchange rate.
