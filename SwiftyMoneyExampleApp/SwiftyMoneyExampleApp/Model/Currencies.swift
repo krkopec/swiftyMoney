@@ -1,12 +1,13 @@
 //
-//  PredefinedCurrencies.swift
-//  SwiftyMoneyTests
+//  Currencies.swift
+//  SwiftyMoneyExampleApp
 //
 //  Created by Krystian Kopeć on 07/05/2019.
-//  Copyright © 2019 Krystian Kopeć. All rights reserved.
+//  Copyright © 2019 kr.kopec. All rights reserved.
 //
 
 import Foundation
+import SwiftyMoney
 
 extension Currency {
 
@@ -15,16 +16,11 @@ extension Currency {
                                       symbol: "€",
                                       exponent: 2)
 
-
     public static let polishZloty = Currency(name: "Polish zloty",
                                              code: "PLN",
                                              symbol: "zł",
                                              exponent: 2)
 
-    public static let poundSterling = Currency(name: "Pound sterling",
-                                               code: "GBP",
-                                               symbol: "£",
-                                               exponent: 2)
 
     public static let swedishKrona = Currency(name: "Swedish krona",
                                               code: "SEK",
@@ -35,4 +31,11 @@ extension Currency {
                                           code: "USD",
                                           symbol: "$",
                                           exponent: 2)
+
+    public static let poundSterling = Currency(name: "Pound sterling",
+                                               code: "GBP",
+                                               symbol: "£",
+                                               exponent: 2)
+
 }
+

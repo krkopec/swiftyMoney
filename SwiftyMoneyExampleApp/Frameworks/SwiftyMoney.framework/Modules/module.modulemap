@@ -1,0 +1,4 @@
+framework module SwiftyMoney {
+  header "SwiftyMoney-Swift.h"
+  requires objc
+}
