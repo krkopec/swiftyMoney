@@ -26,7 +26,7 @@ public class MoneyFormatter {
         formatter.currencyCode = money.currency.code
         formatter.numberStyle = style
         formatter.currencySymbol = money.currency.symbol
-        formatter.maximumFractionDigits = money.currency.subunit?.roundingScale ?? 0
+        formatter.maximumFractionDigits = money.currency.exponent
         formatter.locale = locale
 
         guard let moneyString = formatter.string(from: money.value as NSNumber)

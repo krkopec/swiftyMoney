@@ -13,30 +13,26 @@ extension Currency {
     public static let euro = Currency(name: "Euro",
                                       code: "EUR",
                                       symbol: "€",
-                                      subunit: CurrencySubunit(symbol: "c",
-                                                               roundingScale: 2))
+                                      exponent: 2)
 
 
     public static let polishZloty = Currency(name: "Polish zloty",
                                              code: "PLN",
                                              symbol: "zł",
-                                             subunit: CurrencySubunit(symbol: "gr",
-                                                                      roundingScale: 2))
+                                             exponent: 2)
 
     public static let poundSterling = Currency(name: "Pound sterling",
                                                code: "GBP",
                                                symbol: "£",
-                                               subunit: CurrencySubunit(symbol: "p",
-                                                                        roundingScale: 2))
+                                               exponent: 2)
 
     public static let swedishKrona = Currency(name: "Swedish krona",
                                               code: "SEK",
                                               symbol: "kr",
-                                              subunit: nil)
+                                              exponent: 0)
 
     public static let usDollar = Currency(name: "American dollar",
                                           code: "USD",
                                           symbol: "$",
-                                          subunit: CurrencySubunit(symbol: "c",
-                                                                   roundingScale: 2))
+                                          exponent: 2)
 }

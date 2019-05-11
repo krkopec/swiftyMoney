@@ -11,7 +11,6 @@
 		0820068F2276336B004F6F58 /* CurrencyExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820068B22762DE0004F6F58 /* CurrencyExchangeRate.swift */; };
 		082083DE2275F386002E009C /* CurrencyConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082083DD2275F386002E009C /* CurrencyConverterTests.swift */; };
 		084EDA4B2279C0BC0013546F /* PropertyListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084EDA492279C0BC0013546F /* PropertyListLoader.swift */; };
-		084EDA502279C39C0013546F /* PropertyListLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084EDA4F2279C39C0013546F /* PropertyListLoaderTests.swift */; };
 		08568D332267BF71002D70D9 /* SwiftyMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08568D292267BF71002D70D9 /* SwiftyMoney.framework */; };
 		08568D382267BF71002D70D9 /* MoneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08568D372267BF71002D70D9 /* MoneyTests.swift */; };
 		08568D3A2267BF71002D70D9 /* Money.h in Headers */ = {isa = PBXBuildFile; fileRef = 08568D2C2267BF71002D70D9 /* Money.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -45,7 +44,6 @@
 		0820068B22762DE0004F6F58 /* CurrencyExchangeRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyExchangeRate.swift; sourceTree = "<group>"; };
 		082083DD2275F386002E009C /* CurrencyConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterTests.swift; sourceTree = "<group>"; };
 		084EDA492279C0BC0013546F /* PropertyListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListLoader.swift; sourceTree = "<group>"; };
-		084EDA4F2279C39C0013546F /* PropertyListLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListLoaderTests.swift; sourceTree = "<group>"; };
 		08568D292267BF71002D70D9 /* SwiftyMoney.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyMoney.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		08568D2C2267BF71002D70D9 /* Money.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Money.h; sourceTree = "<group>"; };
 		08568D2D2267BF71002D70D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 				08568D372267BF71002D70D9 /* MoneyTests.swift */,
 				08C16AE9227B773400B1FEFA /* MoneyWithConversion.swift */,
 				08A37E09227F4BAD00AEA5C4 /* MoneyFormatterTests.swift */,
-				084EDA4F2279C39C0013546F /* PropertyListLoaderTests.swift */,
 				08568D392267BF71002D70D9 /* Info.plist */,
 				08E7C3DC2282304300FD2592 /* Extensions */,
 			);
@@ -274,7 +271,6 @@
 				08E7C3B5228211C200FD2592 /* CurrencySubunit.swift in Sources */,
 				082083DE2275F386002E009C /* CurrencyConverterTests.swift in Sources */,
 				0820068F2276336B004F6F58 /* CurrencyExchangeRate.swift in Sources */,
-				084EDA502279C39C0013546F /* PropertyListLoaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
