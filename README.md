@@ -17,6 +17,7 @@ SwiftyMoney is compatible with Swift 4.2 and newer. You can install it:
 1. Directly by downloading the repo and dragging its source code files into your project, or
 2. Through Carthage by adding the line
 ```git "git@github.com:krkopec/swiftyMoney.git" "master"``` to your Cartfile and running ```carthage update``` in the Terminal.
+3. Through Swift Package Manager by entering the url of the repo: ```https://github.com/krkopec/swiftyMoney/``` and selecting an appropriate branch or version.
 
 Before you start using SwiftyMoney, import it into your source code file by declaring: ```import SwiftyMoney```.
 
