@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0879CBC422857E0900B6088A /* SwiftyMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0879CBC322857E0900B6088A /* SwiftyMoney.framework */; };
-		0879CBC522857E3C00B6088A /* SwiftyMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0879CBC322857E0900B6088A /* SwiftyMoney.framework */; };
-		0879CBC622857E3C00B6088A /* SwiftyMoney.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0879CBC322857E0900B6088A /* SwiftyMoney.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0899923122835058009854F5 /* PropertyListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899922A22835058009854F5 /* PropertyListLoader.swift */; };
 		0899923522835D6B009854F5 /* CurrencyExchangeRatePackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899923422835D6B009854F5 /* CurrencyExchangeRatePackage.swift */; };
 		0899923822835DAE009854F5 /* rates.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0899923722835DAE009854F5 /* rates.plist */; };
@@ -28,7 +25,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0879CBC622857E3C00B6088A /* SwiftyMoney.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -36,7 +32,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0879CBC322857E0900B6088A /* SwiftyMoney.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftyMoney.framework; sourceTree = "<group>"; };
 		0899922A22835058009854F5 /* PropertyListLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListLoader.swift; sourceTree = "<group>"; };
 		0899923422835D6B009854F5 /* CurrencyExchangeRatePackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyExchangeRatePackage.swift; sourceTree = "<group>"; };
 		0899923722835DAE009854F5 /* rates.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = rates.plist; sourceTree = "<group>"; };
@@ -55,8 +50,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0879CBC422857E0900B6088A /* SwiftyMoney.framework in Frameworks */,
-				0879CBC522857E3C00B6088A /* SwiftyMoney.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,7 +77,6 @@
 		08E7C3B622822CC900FD2592 = {
 			isa = PBXGroup;
 			children = (
-				08E7C3D622822D9C00FD2592 /* Frameworks */,
 				08E7C3C122822CC900FD2592 /* SwiftyMoneyExampleApp */,
 				08E7C3C022822CC900FD2592 /* Products */,
 			);
@@ -111,14 +103,6 @@
 				08E7C3CE22822CCC00FD2592 /* Info.plist */,
 			);
 			path = SwiftyMoneyExampleApp;
-			sourceTree = "<group>";
-		};
-		08E7C3D622822D9C00FD2592 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0879CBC322857E0900B6088A /* SwiftyMoney.framework */,
-			);
-			path = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
