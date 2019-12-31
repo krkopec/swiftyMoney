@@ -53,6 +53,13 @@ extension Money: Equatable {
     }
 }
 
+extension Money: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(value)
+        hasher.combine(currency)
+    }
+}
+
 extension Money: Comparable {
     public static func < (lhs: Money, rhs: Money) -> Bool {
         if lhs.currency == rhs.currency {
