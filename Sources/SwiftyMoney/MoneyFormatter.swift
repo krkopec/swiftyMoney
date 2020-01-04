@@ -10,24 +10,27 @@ import Foundation
 
 public class MoneyFormatter {
 
-    let formatter = NumberFormatter()
-
-    public init() {
+    private let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-    }
+        formatter.locale = .current
+        return formatter
+    }()
+
 
     public func set(defaultLocale: Locale) {
         formatter.locale = defaultLocale
     }
 
-    public func shortString(from money: Money, locale: Locale, style: NumberFormatter.Style) -> String? {
-
-        let formatter = NumberFormatter()
-        formatter.currencyCode = money.currency.code
+    public func set(style: NumberFormatter.Style) {
         formatter.numberStyle = style
+    }
+
+    public func string(from money: Money) -> String? {
+
+        formatter.currencyCode = money.currency.code
         formatter.currencySymbol = money.currency.symbol
         formatter.maximumFractionDigits = money.currency.exponent
-        formatter.locale = locale
 
         guard let moneyString = formatter.string(from: money.value as NSNumber)
             else {

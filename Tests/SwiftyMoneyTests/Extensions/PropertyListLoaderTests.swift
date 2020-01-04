@@ -24,27 +24,27 @@ class PropertyListLoaderTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testUrlLoading() {
-
-        let testBundle = Bundle(for: type(of: self))
-        let filePath = testBundle.path(forResource: "eurExchangeRates", ofType: "plist")
-        XCTAssertNotNil(filePath)
-    }
-
-    func testPropertyListLoading() {
-
-        let testBundle = Bundle(for: type(of: self))
-        guard let plistPath = testBundle.path(forResource: "eurExchangeRates", ofType: "plist") else {
-            XCTFail(); return
-        }
-        let plistFileUrl = URL(fileURLWithPath: plistPath)
-
-        guard let rates = PropertyListLoader().load(plistUrl: plistFileUrl,
-                                                    as: CurrencyExchangeRatePackage.self)
-            else {
-                XCTFail(); return
-        }
-
-        XCTAssert(rates.baseCurrencyCode == "EUR")
-    }
+//    func testUrlLoading() {
+//
+//        let testBundle = Bundle(for: type(of: self))
+//        let filePath = testBundle.path(forResource: "eurExchangeRates", ofType: "plist")
+//        XCTAssertNotNil(filePath)
+//    }
+//
+//    func testPropertyListLoading() {
+//
+//        let testBundle = Bundle(for: type(of: self))
+//        guard let plistPath = testBundle.path(forResource: "eurExchangeRates", ofType: "plist") else {
+//            XCTFail(); return
+//        }
+//        let plistFileUrl = URL(fileURLWithPath: plistPath)
+//
+//        guard let rates = PropertyListLoader().load(plistUrl: plistFileUrl,
+//                                                    as: CurrencyExchangeRatePackage.self)
+//            else {
+//                XCTFail(); return
+//        }
+//
+//        XCTAssert(rates.baseCurrencyCode == "EUR")
+//    }
 }
