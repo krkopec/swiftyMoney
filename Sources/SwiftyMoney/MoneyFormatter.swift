@@ -17,6 +17,10 @@ public class MoneyFormatter {
         return formatter
     }()
 
+    var locale: Locale {
+        return formatter.locale
+    }
+
     public init() { }
 
     public func set(defaultLocale: Locale) {

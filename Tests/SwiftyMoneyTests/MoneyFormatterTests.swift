@@ -32,7 +32,9 @@ class MoneyFormatterTests: XCTestCase {
 
     func testFormatter2() {
         let expectedResult2 = "10,00 €"
-        let actualResult2 = MoneyFormatter().string(from: money)
+        let formatter = MoneyFormatter()
+        formatter.set(defaultLocale: .init(identifier: "pl"))
+        let actualResult2 = formatter.string(from: money)
         XCTAssertTrue(expectedResult2 == actualResult2!)
     }
 
