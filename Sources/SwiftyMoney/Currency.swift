@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// A structure representing the concept of a currency.
+/// A class representing the concept of a currency.
 public class Currency {
 
     /// A property representing Currency's localizable name, e.g. "US Dollar"
@@ -23,15 +23,19 @@ public class Currency {
     /// A property representing Currency's main symbol, e.g. "$" for US dollar.
     public let symbol: String
 
+    /// A complentary property used for differentiating between instances of the class
+    public let identifier: UUID?
+
     // A property that handles the decimal number behaviour used by the currency
     public var decimalHandler: NSDecimalNumberHandler
 
-    public init(name: String, code: String, symbol: String, exponent: Int) {
+    public init(identifier: UUID? = nil, name: String, code: String, symbol: String, exponent: Int) {
 
         self.name = name
         self.code = code
         self.symbol = symbol
         self.exponent = exponent
+        self.identifier = identifier
         
         decimalHandler = NSDecimalNumberHandler(roundingMode: .bankers,
                                                 scale: Int16(exponent),
@@ -55,9 +59,7 @@ extension Currency: Equatable {
 
 extension Currency: Hashable {
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(name)
         hasher.combine(code)
-        hasher.combine(symbol)
-        hasher.combine(exponent)
+        hasher.combine(identifier)
     }
 }
