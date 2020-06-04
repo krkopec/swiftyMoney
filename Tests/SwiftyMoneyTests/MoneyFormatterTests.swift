@@ -11,11 +11,37 @@ import XCTest
 
 class MoneyFormatterTests: XCTestCase {
 
-    var money = Money(value: 10, currency: .euro)
+    var money: Money!
+
+    var euro: Currency!
+    var poundSterling: Currency!
+    var usDollar: Currency!
+
+    var euroToPoundRate: CurrencyExchangeRate!
+    var euroToUSDollarRate: CurrencyExchangeRate!
+    var poundToUSDollarRate: CurrencyExchangeRate!
 
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        euro = Currencies.getCurrency(withCurrencyCode: "EUR")!
+        poundSterling = Currencies.getCurrencies(forCountryCode: "UK").first!
+        usDollar = Currencies.getCurrency(withCurrencyCode: "USD")!
 
+        money = Money(value: 10, currency: euro)
+
+        euroToPoundRate = CurrencyExchangeRate(sourceCurrency: euro,
+                                               targetCurrency: poundSterling,
+                                               allowsInverseConversion: true,
+                                               sourceToTargetRate: 0.87295)
+
+        euroToUSDollarRate = CurrencyExchangeRate(sourceCurrency: euro,
+                                                  targetCurrency: usDollar,
+                                                  allowsInverseConversion: true,
+                                                  sourceToTargetRate: 1.12979)
+
+        poundToUSDollarRate = CurrencyExchangeRate(sourceCurrency: poundSterling,
+                                                   targetCurrency: usDollar,
+                                                   allowsInverseConversion: true,
+                                                   sourceToTargetRate: 1.29422)
     }
 
     override func tearDown() {
