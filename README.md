@@ -8,6 +8,7 @@ SwiftyMoney is inspired by NSMeasurement and its related classes, which are avai
 SwiftyMoney's features are as follows:
 * It provides a Money struct which contains information about a money amount, such as its value and currency. The Money struct represents monetary values by means of Foundation's Decimal struct in order to avoid floating point rounding errors and enable complex mathematical calculations.
 * It provides a Currency class which contains information about a monetary unit. 
+* It provides a ready-to-use Currencies struct which includes some methods for sorting and filtering currencies together with a set of Currency objects for 150+ currencies used worldwide. These objects include data such as a currency name, code, exponent, country codes of the countries where a particular currency is used.
 * It provides a CurrencyConverter class which makes it possible to convert monies to other currencies.
 * It provides a simple-to-use string formatter for formatting amounts in different currencies and for different languages.
 
@@ -42,7 +43,7 @@ let euro = Currency(name: "Euro",
 let swedishKrona = Currency(name: "Swedish krona", 
                             code: "SEK", 
                             symbol: "kr", 
-                            exponent: 0)
+                            exponent: 2)
 ```
 
 In order to ease the management of different currencies, it is advisable to extend the Currency class by using static properties, as follows:
