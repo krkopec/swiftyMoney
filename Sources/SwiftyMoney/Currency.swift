@@ -33,14 +33,14 @@ public class Currency {
     public let countryCodes: Set<String>
 
     /// A property representing Currency's fractional unit, such as "cent" for US Dollar.
-    public let fractionalUnitName: String
+    public let fractionalUnitName: String?
 
     public init(identifier: UUID? = nil,
                 name: String,
                 code: String,
-                symbol: String?,
+                symbol: String? = nil,
                 exponent: Int,
-                fractionalUnitName: String,
+                fractionalUnitName: String? = nil,
                 countryCodes: Set<String> = []) {
 
         self.identifier = identifier
@@ -72,7 +72,7 @@ extension Currency: Equatable {
 }
 
 extension Currency: Hashable {
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(code)
         hasher.combine(identifier)
     }
