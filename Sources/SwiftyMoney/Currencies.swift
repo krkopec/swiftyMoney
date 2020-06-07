@@ -21,21 +21,22 @@ public struct Currencies {
     }
 
     /// A function that returns an array of arrays of Currency objects, sorted alphabetically
-    public static func currencyNamesGroupedAlphabetically() -> [[String]] {
+    public static func currenciesGroupedAlphabetically() -> [[Currency]] {
 
-        let currencyNames = Currencies.currencyNamesAlphabetically().removeDuplicates()
+        let currencies = Currencies.currenciesAlphabetically().removeDuplicates()
 
-        return currencyNames.reduce(into: []) { (result, currencyName) in
-            guard let initial = currencyName.first?.uppercased() else { return }
+        return currencies.reduce(into: []) { (result, currency) in
+            guard let initial = currency.name.first?.uppercased() else { return }
 
             // create row if a row with such an initial does not exists
-            if !result.contains(where: { countriesWithInitial -> Bool in
-                countriesWithInitial.first?.first?.uppercased() == initial }) {
-                result.append([currencyName])
-                // if a row exists, add items to it
+            if !result.contains(where: { currenciesWithInitial -> Bool in
+                currenciesWithInitial.first?.name.first?.uppercased() == initial }) {
+                result.append([currency])
+
+            // if a row exists, add items to it
             } else {
                 guard var lastArray = result.last else { return }
-                lastArray.append(currencyName)
+                lastArray.append(currency)
                 var newCurrencyNamesGrouped = Array(result.dropLast())
                 newCurrencyNamesGrouped.append(lastArray)
                 result = newCurrencyNamesGrouped
